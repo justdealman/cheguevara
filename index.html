@@ -126,10 +126,10 @@
 			<div class="menu__core" data-ratio="0.4062" data-self data-animated="-50">
 				<div class="menu__row">
 					<div class="menu__item">
-						<span class="item-menu" data-animated="-75"><i class="icon-dish"></i>Меню</span>
+						<a href="./pic/food-menu.jpg" class="item-menu modal-pic" data-animated="-75"><i class="icon-dish"></i>Меню</a>
 					</div>
 					<div class="menu__item">
-						<span class="item-menu" data-animated="-75"><i class="icon-glass"></i>Карта бара</span>
+						<a href="./pic/bar-menu.jpg" class="item-menu modal-pic" data-animated="-75"><i class="icon-glass"></i>Карта бара</a>
 					</div>
 				</div>
 				<img src="./pic/menu-pic.jpg" width="1280" height="520" class="img-cover" alt="">
@@ -189,10 +189,10 @@
 					<a href="#" class="vkontakte-icon"></a>
 					<a href="#" class="instagram-icon"></a>
 				</div>
-				<div class="contacts--map">
+				<a href="#map" class="contacts--map modal-map">
 					<p>Как добраться</p>
 					<img src="./pic/map.jpg" width="285" height="150" class="img-cover" alt="">
-				</div>
+				</a>
 			</div>
 		</div>
 		<div class="footer-clear"></div>
@@ -219,7 +219,9 @@
 			</div>
 		</div>
 	</div>
+	<div id="map"></div>
 	<script src="./js/libs.js"></script>
+	<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 	<script src="./js/scripts.js"></script>
 </body>
 </html>

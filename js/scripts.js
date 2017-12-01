@@ -126,6 +126,7 @@ $(function() {
 		}
 		setBg();
 		setRatio();
+		$.fancybox.update();
 	}
 	startApp();
 	var lastWidth = $(window).width();
@@ -168,5 +169,34 @@ $(function() {
 		e.preventDefault();
 		$('[data-target], .fade-bg').removeClass('is-opened');
 		$('[data-open]').removeClass('is-active');
+	});
+	
+	$('.modal-pic').fancybox({
+		padding: 0
+	});
+
+	ymaps.ready(function () {
+		var myMap;
+		$('.modal-map').fancybox({
+			padding: 0,
+			maxWidth: 1280,
+			width: '90%',
+			height: '90%',
+			autoSize: false,
+			afterShow: function() {
+				myMap = new ymaps.Map('map', {
+					center: [53.3351121798391,83.77614487884517],
+					zoom: 16
+				}),
+				myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+					balloonContent: 'Красноармейский проспект, 47а'
+				});
+				myMap.geoObjects.add(myPlacemark);
+			},
+			afterClose: function() {
+				myMap.destroy();
+				myMap = null;
+			}
+		});
 	});
 });
