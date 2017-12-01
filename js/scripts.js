@@ -126,7 +126,6 @@ $(function() {
 		}
 		setBg();
 		setRatio();
-		$.fancybox.update();
 	}
 	startApp();
 	var lastWidth = $(window).width();
@@ -192,6 +191,9 @@ $(function() {
 					balloonContent: 'Красноармейский проспект, 47а'
 				});
 				myMap.geoObjects.add(myPlacemark);
+			},
+			onUpdate: function() {
+				myMap.container.fitToViewport();
 			},
 			afterClose: function() {
 				myMap.destroy();
