@@ -25,7 +25,17 @@ function setRatio() {
 		} else {
 			var t = $(this);
 		}
-		t.outerHeight(t.outerWidth()*$(this).attr('data-ratio'));
+		if ( !$(this)[0].hasAttribute('data-adaptive-ratio') ) {
+			var r = $(this).attr('data-ratio');
+		} else {
+			console.log('asd');
+			if ( !Modernizr.mq('(max-width:759px)') ) {
+				var r = $(this).attr('data-desktop-ratio');
+			} else {
+				var r = $(this).attr('data-mobile-ratio');
+			}
+		}
+		t.outerHeight(t.outerWidth()*r);
 	});
 }
 $(function() {
@@ -86,22 +96,41 @@ $(function() {
 		dots: false,
 		infinite: false,
 		cssEase: 'ease-out',
-		speed: 500
+		speed: 500,
+		responsive: [
+			{
+				breakpoint: 999,
+				settings: {
+					slidesToShow: 3
+				}
+			}, {
+				breakpoint: 759,
+				settings: {
+					slidesToShow: 2
+				}
+			}
+		]
 	});
 
 	$(document).on('scroll', function() {
 		$('[data-animated]').each(function() {
 			var t = $(this);
-			var progress = ($(document).scrollTop()-(t.offset().top-$(window).height()))/($(window).height()+t.outerHeight())-0.5;
-			if ( progress > 0.5 ) {
-				progress = 0.5;
-			} else if ( progress <= -0.5 ) {
-				progress = -0.5;
+			if ( !isMobile ) {
+				var progress = ($(document).scrollTop()-(t.offset().top-$(window).height()))/($(window).height()+t.outerHeight())-0.5;
+				if ( progress > 0.5 ) {
+					progress = 0.5;
+				} else if ( progress <= -0.5 ) {
+					progress = -0.5;
+				}
+				t.css({
+					'transform': 'translateY('+$(this).attr('data-animated')*progress+'px)',
+					'-webkit-transform': 'translateY('+$(this).attr('data-animated')*progress+'px)'
+				});
+			} else {({
+					'transform': 'translateY(0)',
+					'-webkit-transform': 'translateY(0)'
+				});
 			}
-			t.css({
-				'transform': 'translateY('+$(this).attr('data-animated')*progress+'px)',
-				'-webkit-transform': 'translateY('+$(this).attr('data-animated')*progress+'px)'
-			})
 		});
 	});
 		
